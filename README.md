@@ -2,7 +2,7 @@
 
 Reading a big data file with Amazon Athena
 
-The fifth part of case study on how I got on reading a big file with C, Python, spark-python, AWS elastic map-reduce and 
+The fifth part of a case study on how I got on reading a big file with C, Python, spark-python, AWS elastic map-reduce and 
 this - AWS Athena
 
 As a reminder, I'm trying to read the same big file (21 Gbytes) we read before with C, python, spark-python and aws elastic map reduce 
@@ -35,7 +35,7 @@ stored in AWS S3 buckets. It is fully managed and serverless which means it can 
 It also means that you don't have to worry about infrastructure and can focus solely on creating SQL statements. To start using 
 Athena you basically describe the location and format of the data file that you want to query. This involves creating an external 
 schema/table in an Athena database that lets Athena know a) the bucket name where the data file(s) are stored, b) the format of 
-the file e.g where it's text, CSV, AVRO, Parquet etc ...  and c) the fields in the file including the field separator , field name 
+the file e.g whether it's text, CSV, AVRO, Parquet etc ...  and c) the fields in the file including the field separator , field name 
 and field type e.g Float, SmallInt, Date and so on. Once this "table" is created sucessfully you can simply run queries against 
 it as you would a regular database table. It's also possible to hook up Athena to ODBC and JDBC for programmatic control. So, here are 
 my timimngs.
