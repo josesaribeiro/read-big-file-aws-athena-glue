@@ -41,7 +41,7 @@ AWS Glue via a crawler. In either case once it's created sucessfully you can sim
 it as you would a regular database table. It's also possible to hook up Athena to ODBC and JDBC for programmatic control. So, here are 
 my timimngs.
 
-**NB Athena stores query outputs automatically into S3**
+**NB Athena stores query outputs automatically into S3 either to a default or user-specified location**
 
 As a reminder, here are the timings I got using the other methods in this case-study:-
 
