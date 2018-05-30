@@ -1,9 +1,9 @@
-# read-big-file-aws-athena
+# read-big-file-aws-athena-glue
 
-Reading a big data file with Amazon Athena
+Reading a big data file with AWS Athena and AWS Glue
 
 The fifth part of a case study on how I got on reading a big file with C, Python, spark-python, AWS elastic map-reduce and 
-this - AWS Athena
+this - AWS Athena and Glue
 
 As a reminder, I'm trying to read the same big file (21 Gbytes) we read before with C, python, spark-python and aws elastic map reduce 
 but this time using AWS Athena. Just thought it would be interesting to try it out to see how the timings would differ. Just to recap, the data file is about 21 Gigabtyes long and holds approximately 335 Million pipe separated records. The first 10 records are shown below:
@@ -27,7 +27,7 @@ The second field in the above file can range between 1 and 56 and the goal was t
 file so that all the records with the same value for the second field would be grouped together in the same file. i.e we 
 would end up with 56 separate files, period1.txt, period2.txt ... period56.txt each containing approximately 6 million records.
 
-Just off the bat I will say this about AWS Athena - WOW!! it's blisteringly fast, read on to find out just how fast.
+Just off the bat I will say this about AWS Athena and Glue - WOW!! They are blisteringly fast, read on to find out just how fast.
 
 A little bit about Athena first. Athena is a relatively new service from AWS and is based on the Presto MPP SQL engine 
 originally developed by Facebook. It is a serverless data processing tool that enables you to perform SQL queries on data files 
@@ -56,20 +56,44 @@ AWS elastic map-reduce: 1 hour
 
 Here are my AWS Athena timings (remember this is querying a 21Gb, 335 million record data file):
 
-select count(*), periodid from holdings group by periodid    : 15.83 seconds
+**select count(*), periodid from holdings group by periodid    : 15.83 seconds**
 
-select count(*) from holdings where periodid = 56      :   14.37 seconds to return 7,841,105 records
+**select count(*) from holdings where periodid = 56      :   14.37 seconds to return 7,841,105 records**
 
-/* return the SUM of the numeric sixth field in my file */
+**/* return the SUM of the numeric sixth field in my file */**
 
-select sum(sharesheld) from holdings    : 19.68 seconds to return the number 170,237,428,853,225,337
+**select sum(sharesheld) from holdings    : 19.68 seconds to return the number 170,237,428,853,225,337**
 
-select * from holdings where periodid = 56      :  42 seconds
+**select * from holdings where periodid = 56      :  42 seconds**
 
 Note that the last query above produces an S3 file with the required data I was looking for. Obviously I would have to repeat 
 this for all 56 periodid's to get the data for each periodid in a separate file but even so the total time taken would 
-be well under 40 minutes. Must admit to being pretty impressed by Athena.
+be well under 40 minutes. 
 
+AWS Glue is a fairly new data extract, transform and load (ETL) service from Amazon. There are a number of parts to it. The most 
+impressive one from my point of view is the data crawler. You specify to Glue where your data files sit , for example, in an S3 bucket 
+and Glue will start a crawler process  that finds the data files and attempts to create a schema or table that describes the data. Once 
+you have a schema for your data you can use Athena to query it like you would a table in a relational database or you can optionally 
+create an ETL job that you can run against the data. For the ETL job you specify the following
 
+a)	General ETL job properties such the IAM role for the job to assume whilst its running, the code used for the script e,g Python or Scala, where the script will be stored
 
+b)	The source table/schema
+
+c)	The target table/schema or an S3 bucket
+
+d)	Column mappings between input and output data
+
+After this you can save the job and the script that it will run is displayed. At this point you can simply run the script if you’re 
+happy with it or you can manually tweak it to do other things such as add transformations and so on. In y case I had to manually tweak 
+it in order to get the data to be written out partitioned by the period ID. I had Glue write out the data in gzip and plain text 
+formats. The timings for these are shown below.
+
+**Create Gzip files partitioned on periodid : 28 minutes**
+**Create plain text files partitioned on periodid : 14 minutes**
+
+Since Glue writes out multiple files per periodid partition there would have to be a bit of data manipluation involved to collect all 
+the files into one partition per periodid but this would not be significant time-wise in the overall scheme of things
+
+Must admit to being pretty impressed by both Athena and Glue.
 
