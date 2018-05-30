@@ -50,9 +50,23 @@ Python 3.6 program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB R
 Spark-Python 3.5 program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB RAM : 36 minutes
 Spark-Scala 2.1  program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB RAM : 48 minutes
 Visual Studio C++ program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB RAM : 59 minutes
+AWS elastic map-reduce: 1 hour
 ```
 
-Here are my athena timings
+Here are my AWS Athena timings (remember this is querying a 21Gb, 335 million record data file):
+
+select count(*), periodid from holdings group by periodid    : 15.83 seconds
+
+select count(*) from holdings where periodid = 56      :   14.37 seconds to return 7,841,105 records
+
+/* return the SUM of the numeric sixth field in my file */
+select sum(sharesheld) from holdings    : 19.68 seconds to return the number 170,237,428,853,225,337
+
+select * from holdings where periodid = 56      :  42 seconds
+
+Note that the last query above produces an S3 file with the required data I was looking for. Obviously I would have to repeat 
+this for all 56 periodid's to get the data for each periodid in a separate file but even so the total time taken would 
+be well under 40 minutes. Must admit to being pretty impressed by Athena.
 
 
 
