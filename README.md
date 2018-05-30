@@ -36,7 +36,8 @@ It also means that you don't have to worry about infrastructure and can focus so
 Athena you basically describe the location and format of the data file that you want to query. This involves creating an external 
 schema/table in an Athena database that lets Athena know a) the bucket name where the data file(s) are stored, b) the format of 
 the file e.g whether it's text, CSV, AVRO, Parquet etc ...  and c) the fields in the file including the field separator , field name 
-and field type e.g Float, SmallInt, Date and so on. Once this "table" is created sucessfully you can simply run queries against 
+and field type e.g Float, SmallInt, Date and so on. Note that you can either create this Athena table manually or by using an 
+AWS Glue via a crawler. In either case once it's created sucessfully you can simply run queries against 
 it as you would a regular database table. It's also possible to hook up Athena to ODBC and JDBC for programmatic control. So, here are 
 my timimngs.
 
