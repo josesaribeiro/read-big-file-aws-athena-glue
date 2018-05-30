@@ -1,4 +1,5 @@
 # read-big-file-aws-athena
+
 Reading a big data file with Amazon Athena
 
 The fifth part of case study on how I got on reading a big file with C, Python, spark-python, AWS elastic map-reduce and 
@@ -36,8 +37,22 @@ Athena you basically describe the location and format of the data file that you 
 schema/table in an Athena database that lets Athena know a) the bucket name where the data file(s) are stored, b) the format of 
 the file e.g where it's text, CSV, AVRO, Parquet etc ...  and c) the fields in the file including the field separator , field name 
 and field type e.g Float, SmallInt, Date and so on. Once this "table" is created sucessfully you can simply run queries against 
-it as you would a regular database table. It's alos possible to hook up Athena to ODBC and JDBC for programmatic control. So, here are my timimngs. First of all a reminder as to the timimgs I got using previous methods
+it as you would a regular database table. It's also possible to hook up Athena to ODBC and JDBC for programmatic control. So, here are 
+my timimngs.
 
+# NB Athena stores query outputs automatically into S3
+
+As a reminder, here are the timings I got using the other methods in this case-study:-
+
+```
+C program on a openVMS Alpha server (Dual 1.33Ghz processors, 32 GB Ram) :- 54 minutes
+Python 3.6 program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB RAM : 18 minutes
+Spark-Python 3.5 program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB RAM : 36 minutes
+Spark-Scala 2.1  program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB RAM : 48 minutes
+Visual Studio C++ program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with 16GB RAM : 59 minutes
+```
+
+Here are my athena timings
 
 
 
