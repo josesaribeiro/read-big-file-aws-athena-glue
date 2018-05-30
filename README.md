@@ -90,6 +90,7 @@ it in order to get the data to be written out partitioned by the period ID. I ha
 formats. The timings for these are shown below.
 
 **Create Gzip files partitioned on periodid : 28 minutes**
+
 **Create plain text files partitioned on periodid : 14 minutes**
 
 Since Glue writes out multiple files per periodid partition there would have to be a bit of data manipluation involved to collect all 
