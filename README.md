@@ -41,7 +41,7 @@ AWS Glue via a crawler. In either case once it's created sucessfully you can sim
 it as you would a regular database table. It's also possible to hook up Athena to ODBC and JDBC for programmatic control. So, here are 
 my timimngs.
 
-**NB Athena stores query outputs automatically into S3
+**NB Athena stores query outputs automatically into S3**
 
 As a reminder, here are the timings I got using the other methods in this case-study:-
 
@@ -61,6 +61,7 @@ select count(*), periodid from holdings group by periodid    : 15.83 seconds
 select count(*) from holdings where periodid = 56      :   14.37 seconds to return 7,841,105 records
 
 /* return the SUM of the numeric sixth field in my file */
+
 select sum(sharesheld) from holdings    : 19.68 seconds to return the number 170,237,428,853,225,337
 
 select * from holdings where periodid = 56      :  42 seconds
