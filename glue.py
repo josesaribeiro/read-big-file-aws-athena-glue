@@ -1,3 +1,7 @@
+#
+# The assumption is that you have already either manually (using Athena) or 
+# automatically (using Glue crawler) to create a database and file object schema/table
+#
 import sys
 from awsglue.transforms import *
 from awsglue.utils import getResolvedOptions
