@@ -29,6 +29,8 @@ would end up with 56 separate files, period1.txt, period2.txt ... period56.txt e
 
 Just off the bat I will say this about AWS Athena and Glue - WOW!! They are blisteringly fast, read on to find out just how fast.
 
+# AWS Athena
+
 A little bit about Athena first. Athena is a relatively new service from AWS and is based on the Presto MPP SQL engine 
 originally developed by Facebook. It is a serverless data processing tool that enables you to perform SQL queries on data files 
 stored in AWS S3 buckets. It is fully managed and serverless which means it can scale automatically to handle HUGE data sets. 
@@ -70,6 +72,8 @@ Note that the last query above produces an S3 file with the required data I was 
 this for all 56 periodid's to get the data for each periodid in a separate file but even so the total time taken would 
 be well under 40 minutes. 
 
+# AWS Glue
+
 AWS Glue is a fairly new data extract, transform and load (ETL) service from Amazon. There are a number of parts to it. The most 
 impressive one from my point of view is the data crawler. You specify to Glue where your data files sit , for example, in an S3 bucket 
 and Glue will start a crawler process  that finds the data files and attempts to create a schema or table that describes the data. Once 
@@ -96,5 +100,5 @@ formats. The timings for these are shown below.
 Since Glue writes out multiple files per periodid partition there would have to be a bit of data manipluation involved to collect all 
 the files into one partition per periodid but this would not be significant time-wise in the overall scheme of things
 
-Must admit to being pretty impressed by both Athena and Glue.
+Must admit to being well impressed by both Athena and Glue.
 
