@@ -3,7 +3,17 @@
 Reading a big data file with AWS Athena and AWS Glue
 
 The fifth part of a case study on how I got on reading a big file with C, Python, spark-python, AWS elastic map-reduce and 
-this - AWS Athena and Glue
+this - AWS Athena and Glue. You can read the parts in this series here:
+
+[part1](https://github.com/taupirho/read-big-file-with-python)
+<br>
+[part2](https://github.com/taupirho/read-big-file-with-spark-python)
+<br>
+[part3](https://github.com/taupirho/read-big-file-with-spark-scala)
+<br>
+[part4](https://github.com/taupirho/read-big-file-with-amazon-emr)
+
+
 
 As a reminder, I'm trying to read the same big file (21 Gbytes) we read before with C, python, spark-python and aws elastic map reduce 
 but this time using AWS Athena. Just thought it would be interesting to try it out to see how the timings would differ. Just to recap, the data file is about 21 Gigabtyes long and holds approximately 366 Million pipe separated records. The first 10 records are shown below:
