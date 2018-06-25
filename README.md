@@ -66,7 +66,7 @@ Visual Studio C++ program on a Quad 3.4 GHz Intel Core i7-3770 windows 7 PC with
 AWS elastic map-reduce: 1 hour
 ```
 
-Here are my AWS Athena timings (remember this is querying a 21Gb, 335 million record data file):
+Here are my AWS Athena timings (remember this is querying a 21Gb, 366 million record data file):
 
 **select count(*), periodid from holdings group by periodid    : 15.83 seconds**
 
@@ -103,9 +103,9 @@ happy with it or you can manually tweak it to do other things such as add transf
 it in order to get the data to be written out partitioned by the period ID. I had Glue write out the data in gzip and plain text 
 formats. The timings for these are shown below.
 
-**Create Gzip files partitioned on periodid : 28 minutes**
+**Create 56 Gzip files partitioned on periodid : 28 minutes**
 
-**Create plain text files partitioned on periodid : 14 minutes**
+**Create 56 plain text files partitioned on periodid : 14 minutes**
 
 Since Glue writes out multiple files per periodid partition there would have to be a bit of data manipluation involved to collect all 
 the files into one partition per periodid but this would not be significant time-wise in the overall scheme of things
